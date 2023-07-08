@@ -1,0 +1,12 @@
+/* Specify in CSS */
+code,
+pre {
+  font-family: "Fira Code", monospace;
+}
+
+@supports (font-variation-settings: normal) {
+  code,
+  pre {
+    font-family: "Fira Code VF", monospace;
+  }
+}
