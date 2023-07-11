@@ -1,11 +1,14 @@
 import React from "react";
-import Editor from "./Editor";
 import "./assets/styles/styles.css";
+import Layout from "./Layout";
+import Notes from "./views/Notes";
+import List from "./List";
 
 export default function App() {
   return (
-    <div className="App">
-      <Editor />
-    </div>
+    <Layout>
+      <Notes />
+      {/* <List /> */}
+    </Layout>
   );
 }

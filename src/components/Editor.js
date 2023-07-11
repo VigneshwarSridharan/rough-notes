@@ -5,6 +5,7 @@ import hljs from "highlight.js";
 import "highlight.js/styles/atom-one-dark.css";
 import ReactQuill, { Quill } from "react-quill";
 import AutoLinks from "quill-auto-links";
+import { useStyletron } from "baseui";
 
 Quill.register("modules/autoLinks", AutoLinks);
 
@@ -49,15 +50,9 @@ const formats = [
   "code",
 ];
 
-const Editor = () => {
+const Editor = ({ value, onChange }) => {
   const quillRef = useRef(null);
-  const [editorValue, setEditorValue] = useState(
-    "Here some example code to do something!"
-  );
-
-  const handleChange = (value) => {
-    setEditorValue(value);
-  };
+  const [css, theme] = useStyletron();
 
   useEffect(() => {
     if (quillRef.current) {
@@ -75,17 +70,19 @@ const Editor = () => {
   }, []);
 
   return (
-    <>
-      <ReactQuill
-        ref={quillRef}
-        value={editorValue}
-        onChange={handleChange}
-        theme="snow"
-        modules={modules}
-        formats={formats}
-      />
-      <div>{editorValue}</div>
-    </>
+    <ReactQuill
+      className={`${theme.name} ${css({
+        flex: 1,
+        display: "flex",
+        flexDirection: "column",
+      })}`}
+      ref={quillRef}
+      value={value}
+      onChange={onChange}
+      theme="snow"
+      modules={modules}
+      formats={formats}
+    />
   );
 };
 
